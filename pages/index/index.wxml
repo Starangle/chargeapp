@@ -1,13 +1,38 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+<view class="title">历史纪录</view>
+
+<view class="table">
+  <view class="row">
+    <text class="cell">事项</text>
+    <text class="cell">付款人</text>
+    <text class="cell">金额</text>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view id="dataRegion">
+    <view class='table'>
+      <view class="row" wx:for="{{showData}}">
+        <text class="cell">{{item.item}}</text>
+        <text class="cell">{{item.name}}</text>
+        <text class="cell">{{item.money}}</text>
+      </view>
+    </view>
   </view>
+</view>
+
+<view id="editor">
+<button id="clear" bindtap='clear'>清空</button>
+<view class='title'>新增条目</view>
+  <form bindsubmit='submit'>
+    <view class="table">
+      <view class="row">
+        <text class="cell">事项</text>
+        <text class="cell">付款人</text>
+        <text class="cell">金额</text>
+      </view>
+      <view class="row">
+        <input value="{{itemv}}" name='item' class="cell" type='text'/>
+        <input value="{{namev}}" name='name' class="cell" type='text'/>
+        <input value="{{moneyv}}" name='money' class="cell" type="digit"/>
+      </view>
+    </view>
+    <button id="adddata" form-type='submit'>记一下</button>
+  </form>
 </view>
